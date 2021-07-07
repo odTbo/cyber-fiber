@@ -1,9 +1,22 @@
-
-
 /*Navigation Bar*/
 .navbar-brand {
-
+    color: whitesmoke;
+    font-weight: bold;
 }
 .navbar-link {
     padding: 6px;
+}
+
+.nav-item, .nav-link {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+/*Pushes content from under navbar*/
+body {
+    padding-top: 65px;
+}
+
+#mainPageTitle {
+    color: #303030;
 }
