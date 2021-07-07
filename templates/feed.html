@@ -3,7 +3,7 @@
 
 <div class="container mt-2">
     <div class="row justify-content-center">
-
+        {% for step in range(10) %}
         {#        POST#}
         <div class="col-lg-4 col-md-8 col-sm-12 my-3 mx-lg-4 mx-md-2 p-3 bg-light border rounded border-primary" id="postBlock">
 
@@ -23,10 +23,10 @@
             </div>
 
             <div class="btn-group col-md-12 text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Expand</button>
-                <button class="btn btn-sm btn-primary">But2</button>
-                <button class="btn btn-sm btn-primary">But3</button>
-                <button class="btn btn-sm btn-primary">But4</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Exp.</button>
+                <button class="btn btn-sm btn-primary">like</button>
+                <button class="btn btn-sm btn-primary">comm</button>
+                <button class="btn btn-sm btn-primary">!</button>
             </div>
         </div>
         <!-- Modal -->
@@ -53,6 +53,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
 
     </div>
 </div>
