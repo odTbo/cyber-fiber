@@ -1,6 +1,10 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
+from forms import RegisterForm, LoginForm
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+Bootstrap(app)
+app.secret_key = "12345"
 
 
 @app.route('/')
@@ -13,14 +17,27 @@ def feed_page():
     return render_template("feed.html")
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit() and request.method == "POST":
+        email = form.email.data
+        password = form.password.data
+        print(email, password)
+
+    return render_template('login.html', form=form)
 
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+    if form.validate_on_submit() and request.method == "POST":
+        email = form.email.data
+        age = form.age.data
+        password = form.password.data
+        print(email, age, password)
+
+    return render_template('register.html', form=form)
 
 
 @app.route('/new-post')

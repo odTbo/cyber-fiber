@@ -1,4 +1,6 @@
 {% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 <div class="overlay"></div>
 <div class="container">
     <div class="row">
@@ -14,7 +16,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-lg-8 col-md-10 mx-auto content">
+        <div class="col-lg-4 col-md-6 pt-5 mx-auto">
 
 {#            {% with messages = get_flashed_messages() %}#}
 {#                {% if messages %}#}
@@ -24,7 +26,7 @@
 {#                {% endif %}#}
 {#            {% endwith %}#}
 {##}
-{#            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}#}
+            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
         </div>
     </div>
 </div>
