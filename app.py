@@ -1,10 +1,70 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, flash
 from forms import RegisterForm, LoginForm
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 from flask_bootstrap import Bootstrap
+import os
 
 app = Flask(__name__)
 Bootstrap(app)
 app.secret_key = "12345"
+
+# CONNECT DB
+if os.environ.get("DATABASE_URL"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# LOGIN MANAGER
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+# CONFIGURE TABLES
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(250))
+    email = db.Column(db.String(250), unique=True, nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    password = db.Column(db.String(250), nullable=False)
+    posts = relationship("Posts", back_populates="author")
+    comments = relationship("Comments", back_populates="author")
+
+
+class Posts(db.Model):
+    __tablename__ = "posts"
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String(250))
+    title = db.Column(db.String(250), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    author = relationship("User", back_populates="posts")
+    comments = relationship("Comments", back_populates="post")
+
+
+class Comments(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String(250))
+    comment = db.Column(db.Text, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    author = relationship("User", back_populates="comments")
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
+    post = relationship("Posts", back_populates="comments")
+
+
+db.create_all()
 
 
 @app.route('/')
@@ -12,6 +72,7 @@ def index():
     return render_template("index.html")
 
 
+@login_required
 @app.route("/feed-page")
 def feed_page():
     return render_template("feed.html")
@@ -22,10 +83,24 @@ def login():
     form = LoginForm()
     if form.validate_on_submit() and request.method == "POST":
         email = form.email.data
-        password = form.password.data
-        print(email, password)
+
+        user = User.query.filter_by(email=email).first()
+
+        if not user or not check_password_hash(user.password, form.password.data):
+            flash('Please check your login details and try again.')
+            return redirect(url_for('login'))
+
+        login_user(user, remember=False)
+        return redirect(url_for('feed_page'))
 
     return render_template('login.html', form=form)
+
+
+@login_required
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -34,8 +109,29 @@ def register():
     if form.validate_on_submit() and request.method == "POST":
         email = form.email.data
         age = form.age.data
-        password = form.password.data
-        print(email, age, password)
+        pass_hash = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
+
+        user = User.query.filter_by(email=email).first()
+        if user:  # if a user is found, we want to redirect back to signup page so user can try again
+            flash("You've already signed up with that e-mail, log in instead!")
+            return redirect(url_for('login'))
+
+        if not check_password_hash(pass_hash, form.password_confirm.data):
+            print("pass's do not match")
+            flash("Passwords do not match!")
+            return redirect(url_for('register'))
+
+        new_user = User(
+            email=email,
+            age=age,
+            password=pass_hash
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        login_user(new_user, remember=False)
+        return redirect(url_for('feed_page'))
 
     return render_template('register.html', form=form)
 
