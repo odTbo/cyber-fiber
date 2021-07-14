@@ -6,6 +6,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from flask_bootstrap import Bootstrap
+from names import generate_name
 import os
 
 app = Flask(__name__)
@@ -64,7 +65,7 @@ class Comments(db.Model):
     post = relationship("Posts", back_populates="comments")
 
 
-db.create_all()
+# db.create_all()
 
 
 @app.route('/')
@@ -89,6 +90,8 @@ def login():
         if not user or not check_password_hash(user.password, form.password.data):
             flash('Please check your login details and try again.')
             return redirect(url_for('login'))
+        user.username = generate_name()
+        db.session.commit()
 
         login_user(user, remember=False)
         return redirect(url_for('feed_page'))
@@ -122,6 +125,7 @@ def register():
             return redirect(url_for('register'))
 
         new_user = User(
+            username=generate_name(),
             email=email,
             age=age,
             password=pass_hash
