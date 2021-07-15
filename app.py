@@ -13,7 +13,7 @@ import os
 
 app = Flask(__name__)
 Bootstrap(app)
-app.secret_key = "12345"
+app.secret_key = os.environ.get("SECRET_KEY")
 
 # CONNECT DB
 if os.environ.get("DATABASE_URL"):
