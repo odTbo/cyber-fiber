@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from functools import wraps
 from flask_bootstrap import Bootstrap
 from names import generate_name
 from datetime import datetime
@@ -13,7 +12,13 @@ import os
 
 app = Flask(__name__)
 Bootstrap(app)
-app.secret_key = os.environ.get("SECRET_KEY")
+
+
+# SET SECRET KEY
+if os.environ.get("SECRET_KEY"):
+    app.secret_key = os.environ.get("SECRET_KEY")
+else:
+    app.secret_key = "12345"
 
 # CONNECT DB
 if os.environ.get("DATABASE_URL"):
