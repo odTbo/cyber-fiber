@@ -13,8 +13,12 @@
     </div>
 
     <p>
-        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg mx-3">Login</a>
-        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg mx-3">Register</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('feed_page') }}" class="btn btn-outline-primary btn-lg mx-3">Check out The Feed</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg mx-3">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg mx-3">Register</a>
+        {% endif %}
     </p>
 
 </div>
