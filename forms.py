@@ -19,6 +19,6 @@ class LoginForm(FlaskForm):
 
 
 class CreatePostForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired()])
-    body = TextAreaField("Content", validators=[DataRequired()], id="FormPostBody")
+    title = StringField("Title", validators=[DataRequired(), Length(max=30)])
+    body = TextAreaField("Content", validators=[DataRequired(), Length(max=1000)], id="FormPostBody")
     submit = SubmitField("Submit")

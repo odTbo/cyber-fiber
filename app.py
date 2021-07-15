@@ -117,6 +117,8 @@ def login():
 
         login_user(user, remember=False)
         return redirect(url_for('feed_page'))
+    elif form.errors:
+        flash_errors(form)
 
     return render_template('login.html', form=form)
 
@@ -139,7 +141,7 @@ def register():
         # Check if age is number
         if not age.isdigit():
             flash("Age must be number! :D")
-            return redirect(url_for('register'))
+            return render_template('register.html', form=form)
 
         # Check if email is unique
         user = User.query.filter_by(email=email).first()
@@ -151,7 +153,7 @@ def register():
         if not check_password_hash(pass_hash, form.password_confirm.data):
             print("pass's do not match")
             flash("Passwords do not match!")
-            return redirect(url_for('register'))
+            return render_template('register.html', form=form)
         # form.errors.items()
 
         new_user = User(
@@ -193,6 +195,8 @@ def new_post():
         db.session.commit()
 
         return redirect(url_for('feed_page'))
+    elif form.errors:
+        flash_errors(form)
 
     return render_template('new_post.html', form=form)
 
