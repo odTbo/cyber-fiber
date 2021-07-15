@@ -8,6 +8,7 @@ from functools import wraps
 from flask_bootstrap import Bootstrap
 from names import generate_name
 from datetime import datetime
+import requests
 import os
 
 app = Flask(__name__)
@@ -71,7 +72,10 @@ class Comments(db.Model):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    response = requests.get("https://api.quotable.io/random?tags=wisdom")
+    quote = response.json()
+
+    return render_template("index.html", quote=quote)
 
 
 @app.route("/feed-page")

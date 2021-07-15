@@ -4,7 +4,12 @@
     <div class="col-lg-8 col-md-10 mx-auto">
         <img src="{{ url_for('static', filename='img/logo.png')}}" style="width: 60%">
         <h1 class="font-weight-bold" id="mainPageTitle">Cyber-Fiber</h1>
-        <p class="m-lg-5 m-md-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At elementum eu facilisis sed odio morbi quis commodo. Tempor commodo ullamcorper a lacus vestibulum sed. Quis eleifend quam adipiscing vitae proin. Urna duis convallis convallis tellus id interdum velit.</p>
+        <div class="container p-md-5 p-sm-2">
+            <p id="MainPageQuoteBody">"{{ quote.content }}"</p>
+            <p id="MainPageQuoteAuthor">-{{ quote.author }}</p>
+        </div>
+
+
     </div>
 
     <p>

@@ -20,6 +20,12 @@ body {
 #mainPageTitle {
     color: #303030;
 }
+#MainPageQuoteBody{
+    font-style: italic;
+}
+#MainPageQuoteAuthor{
+    font-size: 1.2rem;
+}
 #PostTitle {
     font-size: 1.2rem;
     color: dodgerblue;
