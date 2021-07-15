@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, CreatePostForm
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from flask_bootstrap import Bootstrap
 from names import generate_name
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -73,10 +74,11 @@ def index():
     return render_template("index.html")
 
 
-@login_required
 @app.route("/feed-page")
+@login_required
 def feed_page():
-    return render_template("feed.html")
+    posts = Posts.query.all()
+    return render_template("feed.html", posts=posts)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -99,8 +101,8 @@ def login():
     return render_template('login.html', form=form)
 
 
-@login_required
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -140,9 +142,29 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/new-post')
+@app.route('/new-post', methods=["GET", "POST"])
+@login_required
 def new_post():
-    return render_template('new_post.html')
+    form = CreatePostForm()
+    if form.validate_on_submit() and request.method == "POST":
+        title = form.title.data
+        body = form.body.data
+        today = datetime.now()
+        date = today.strftime("%d/%m/%Y")
+
+        db_new_post = Posts(
+            date=date,
+            title=title,
+            body=body,
+            author=current_user,
+        )
+
+        db.session.add(db_new_post)
+        db.session.commit()
+
+        return redirect(url_for('feed_page'))
+
+    return render_template('new_post.html', form=form)
 
 
 if __name__ == '__main__':

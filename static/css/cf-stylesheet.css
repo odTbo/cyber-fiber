@@ -20,3 +20,25 @@ body {
 #mainPageTitle {
     color: #303030;
 }
+#PostTitle {
+    font-size: 1.2rem;
+    color: dodgerblue;
+}
+#PostAuthor {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: dodgerblue;
+    text-decoration: none;
+}
+#PostBody {
+    color: #303030;
+    font-size: 1.5rem;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#FormPostBody {
+    height: 25vh
+}

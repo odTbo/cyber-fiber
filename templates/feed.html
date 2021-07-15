@@ -3,22 +3,25 @@
 
 <div class="container mt-2">
     <div class="row justify-content-center">
-        {% for step in range(10) %}
+        {% for post in posts %}
         {#        POST#}
         <div class="col-lg-4 col-md-8 col-sm-12 my-3 mx-lg-4 mx-md-2 p-3 bg-light border rounded border-primary" id="postBlock">
 
             <div class="container">
                 <div class="row">
                     <div class="col" align="left">
-                        <h5>Author Name</h5>
+                        <a href="#" id="PostAuthor">{{ post.author.username }}</a>
+{#                        <h5 id="PostTitle">{{ post.title }}</h5>#}
                     </div>
                     <div class="col" align="right">
-                        <h5 class="ml-auto">XX.XX.XXXX</h5>
+                        <h5 class="ml-auto">{{ post.date }}</h5>
                     </div>
                 </div>
 
                 <hr>
-                <p class="p-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div>
+                    <p id="PostBody">{{ post.body }}</p>
+                </div>
                 <hr>
             </div>
 
@@ -34,13 +37,13 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Article Title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{ post.title }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                                        <p class="p-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <p class="p-1">{{ post.body }}</p>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group col-md-12 text-center">
@@ -54,6 +57,7 @@
             </div>
         </div>
         {% endfor %}
+
 
     </div>
 </div>

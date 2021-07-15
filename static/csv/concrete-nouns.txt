@@ -7,48 +7,38 @@ Aircraft
 Apartment
 Arrow
 Antlers
-Apro
 Alligator
 Architect
 Ankle
 Armchair
-Aunt
 Ball
 Bermudas
-Beans
+Bean
 Balloon
 Bear
 Blouse
 Bed
 Bow
 Bread
-Black
 Board
-Bones
+Bone
 Bill
-Bitterness
-Boxers
+Boxer
 Belt
 Brain
 Buffalo
 Bird
 Baby
 Book
-Back
 Butter
-Bulb
-Buckles
 Bat
 Bank
 Bag
-Bra
-Boots
-Blazer
+Boot
 Bikini
 Bookcase
 Bookstore
-Bus stop
-Brass
+Bus
 Brother
 Boy
 Blender
@@ -61,21 +51,15 @@ Car
 Cow
 Cap
 Cooker
-Cheeks
 Cheese
-Credenza
 Carpet
 Crow
-Crest
-Chest
 Chair
 Candy
 Cabinet
 Cat
 Coffee
 Children
-Cookware
-Chaise longue
 Chicken
 Casino
 Cabin
@@ -84,14 +68,9 @@ Church
 Cafe
 Cinema
 Choker
-Cravat
 Cane
-Costume
-Cardigan
 Chocolate
-Crib
 Couch
-Cello
 Cashier
 Composer
 Cave
@@ -99,7 +78,6 @@ Country
 Computer
 Canoe
 Clock
-Charlie (U.K)
 Dog
 Deer
 Donkey
@@ -145,7 +123,6 @@ Ginger
 Giraffe
 Gauva
 Grains
-Gas station
 Garage
 Gloves
 Glasses
@@ -249,8 +226,6 @@ Pipe
 Police
 Pen
 Pharmacy
-Petrol station
-Police station
 Parrot
 Plane
 Pigeon
@@ -333,7 +308,6 @@ Singer
 Senator
 Street
 Supermarket
-Swimming pool
 Star
 Sky
 Sun
@@ -354,7 +328,6 @@ Television
 Teacher
 Turtle
 Tablet
-Train station
 Toothpaste
 Tail
 Theater
@@ -385,14 +358,13 @@ Wallet
 Wolf
 Waist
 Wrist
-Water melon
+Watermelon
 Whale
 Water
 Wings
 Whisker
 Watch
 Woman
-Washing machine
 Wheelchair
 Waiter
 Wound
