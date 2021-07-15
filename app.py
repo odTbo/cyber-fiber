@@ -72,7 +72,7 @@ class Comments(db.Model):
     post = relationship("Posts", back_populates="comments")
 
 
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
