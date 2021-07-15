@@ -37,6 +37,16 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(user_id)
 
+# FORM ERRORS
+def flash_errors(form):
+    """Flashes form errors"""
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+            ), 'error')
+
 
 # CONFIGURE TABLES
 class User(UserMixin, db.Model):
@@ -126,15 +136,23 @@ def register():
         age = form.age.data
         pass_hash = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
 
+        # Check if age is number
+        if not age.isdigit():
+            flash("Age must be number! :D")
+            return redirect(url_for('register'))
+
+        # Check if email is unique
         user = User.query.filter_by(email=email).first()
         if user:  # if a user is found, we want to redirect back to signup page so user can try again
             flash("You've already signed up with that e-mail, log in instead!")
             return redirect(url_for('login'))
 
+        # Check if passwords match
         if not check_password_hash(pass_hash, form.password_confirm.data):
             print("pass's do not match")
             flash("Passwords do not match!")
             return redirect(url_for('register'))
+        # form.errors.items()
 
         new_user = User(
             username=generate_name(),
@@ -148,6 +166,8 @@ def register():
 
         login_user(new_user, remember=False)
         return redirect(url_for('feed_page'))
+    elif form.errors:
+        flash_errors(form)
 
     return render_template('register.html', form=form)
 
