@@ -4,74 +4,109 @@
 <div class="container mt-2">
     <div class="row justify-content-center">
         {% for post in posts %}
-        {#        POST#}
-        <div class="col-lg-4 col-md-8 col-sm-12 my-3 mx-lg-4 mx-md-2 p-3 bg-light border rounded border-primary" id="postBlock">
+            {#        POST#}
+            <div class="col-lg-4 col-md-8 col-sm-12 my-3 mx-lg-4 mx-md-2 p-3 bg-light border rounded border-primary" id="postBlock">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col" align="left">
-                        <a href="#" id="PostAuthor">{{ post.author.username }}</a>
-{#                        <h5 id="PostTitle">{{ post.title }}</h5>#}
+                <div class="container">
+                    <div class="row">
+                        <div class="col" align="left">
+                            <a href="#" id="PostAuthor">{{ post.author.username }}</a>
+                            {#                        <h5 id="PostTitle">{{ post.title }}</h5>#}
+                        </div>
+                        <div class="col" align="right">
+                            <h5 class="ml-auto">{{ post.date }}</h5>
+                        </div>
                     </div>
-                    <div class="col" align="right">
-                        <h5 class="ml-auto">{{ post.date }}</h5>
+
+                    <hr>
+                    <div>
+                        <p id="PostBody">{{ post.body }}</p>
                     </div>
+                    <hr>
                 </div>
 
-                <hr>
-                <div>
-                    <p id="PostBody">{{ post.body }}</p>
-                </div>
-                <hr>
-            </div>
-
-            <div class="btn-group col-md-12 text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                    <i class="fas fa-expand"></i>
-                </button>
-                <button class="btn btn-sm btn-primary">
-                    <i class="fas fa-heart"></i>
-                </button>
-                <button class="btn btn-sm btn-primary">
-                    <i class="far fa-comment-alt"></i>
-                </button>
-                <button class="btn btn-sm btn-primary">
-                    <i class="fas fa-flag"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">{{ post.title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                <div class="btn-group col-md-12 text-center">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#expandedPostModal">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="far fa-comment-alt"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    {% if post.author == current_user %}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg">
+                            <i class="fas fa-trash"></i>
                         </button>
-                    </div>
-                    <div class="modal-body">
-                                        <p class="p-1">{{ post.body }}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn-group col-md-12 text-center">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" data-target="#exampleModalLong">
-                                <i class="fas fa-compress"></i>
+{#                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" role="button"><i class="fas fa-trash"></i></a>#}
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Expand Post -->
+            <div class="modal fade" id="expandedPostModal" tabindex="-1" role="dialog" aria-labelledby="expandedPostModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="expandedPostModalTitle">{{ post.title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
-                            <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="btn btn-sm btn-primary">
-                                <i class="far fa-comment-alt"></i>
-                            </button>
-                            <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-flag"></i>
-                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="p-1">{{ post.body }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group col-md-12 text-center">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#expandedPostModal">
+                                    <i class="fas fa-compress"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="far fa-comment-alt"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {% if post.author == current_user %}
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    {#                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" role="button"><i class="fas fa-trash"></i></a>#}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            {#            DELETE POST WARNING#}
+            <div class="modal fade" id="postDeleteWarningMsg" tabindex="-1" role="dialog" aria-labelledby="postDeleteWarningMsgTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="postDeleteWarningMsgTitle">Warning</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this post?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                            <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger d-flex justify-content-center align-items-center" role="button">Yes, delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         {% endfor %}
 
 

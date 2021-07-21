@@ -106,10 +106,13 @@ def feed_page():
 def login():
     form = LoginForm()
     if form.validate_on_submit() and request.method == "POST":
+
+        # Get form input
         email = form.email.data
 
         user = User.query.filter_by(email=email).first()
 
+        # Check user input
         if not user or not check_password_hash(user.password, form.password.data):
             flash('Please check your login details and try again.')
             return redirect(url_for('login'))
@@ -119,6 +122,8 @@ def login():
 
         login_user(user, remember=False)
         return redirect(url_for('feed_page'))
+
+    # Flash form errors if there are any
     elif form.errors:
         flash_errors(form)
 
@@ -136,6 +141,8 @@ def logout():
 def register():
     form = RegisterForm()
     if form.validate_on_submit() and request.method == "POST":
+
+        # Get form input
         email = form.email.data
         age = form.age.data
         pass_hash = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
@@ -158,6 +165,7 @@ def register():
             return render_template('register.html', form=form)
         # form.errors.items()
 
+        # Create new user database entry
         new_user = User(
             username=generate_name(),
             email=email,
@@ -170,6 +178,8 @@ def register():
 
         login_user(new_user, remember=False)
         return redirect(url_for('feed_page'))
+
+    # Flash form errors if there are any
     elif form.errors:
         flash_errors(form)
 
@@ -197,10 +207,24 @@ def new_post():
         db.session.commit()
 
         return redirect(url_for('feed_page'))
+
+    # Flash form errors if there are any
     elif form.errors:
         flash_errors(form)
 
     return render_template('new_post.html', form=form)
+
+
+@app.route('/delete-post/<int:post_id>')
+def delete_post(post_id):
+    # Get post to be deleted
+    post = Posts.query.get(post_id)
+
+    # Delete post
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for('feed_page'))
 
 
 if __name__ == '__main__':
