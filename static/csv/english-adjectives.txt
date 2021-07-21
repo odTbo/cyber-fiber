@@ -74,12 +74,8 @@ better
 best
 bewitched
 big
-big-hearted
-biodegradable
-bite-sized
 bitter
 black
-black-and-white
 bland
 blank
 blaring
@@ -142,7 +138,6 @@ circular
 classic
 clean
 clear
-clear-cut
 clever
 close
 closed
@@ -157,7 +152,6 @@ colorless
 colossal
 comfortable
 common
-compassionate
 competent
 complete
 complex
@@ -199,7 +193,6 @@ cumbersome
 curly
 curvy
 cute
-cylindrical
 damaged
 damp
 dangerous
@@ -281,7 +274,6 @@ eager
 earnest
 early
 easy
-easy-going
 ecstatic
 edible
 educated
@@ -330,8 +322,6 @@ experienced
 expert
 extraneous
 extroverted
-extra-large
-extra-small
 fabulous
 failing
 faint
@@ -345,8 +335,6 @@ fancy
 fantastic
 far
 faraway
-far-flung
-far-off
 fast
 fat
 fatal
@@ -370,7 +358,6 @@ firsthand
 fitting
 fixed
 flaky
-flamboyant
 flashy
 flat
 flawed
@@ -401,8 +388,6 @@ French
 fresh
 frequent
 friendly
-frightened
-frightening
 frigid
 frilly
 frizzy
@@ -442,7 +427,6 @@ glossy
 glum
 golden
 good
-good-natured
 gorgeous
 graceful
 gracious
@@ -455,7 +439,6 @@ gray
 great
 greedy
 green
-gregarious
 grim
 grimy
 gripping
@@ -479,9 +462,7 @@ handmade
 handsome
 handy
 happy
-happy-go-lucky
 hard
-hard-to-find
 harmful
 harmless
 harmonious
@@ -500,7 +481,6 @@ helpless
 hidden
 hideous
 high
-high-level
 hilarious
 hoarse
 hollow
@@ -531,8 +511,6 @@ idolized
 ignorant
 ill
 illegal
-ill-fated
-ill-informed
 illiterate
 illustrious
 imaginary
@@ -545,24 +523,17 @@ impassioned
 impeccable
 impartial
 imperfect
-imperturbable
 impish
 impolite
 important
 impossible
 impractical
-impressionable
 impressive
 improbable
 impure
 inborn
-incomparable
-incompatible
-incomplete
-inconsequential
 incredible
 indelible
-inexperienced
 indolent
 infamous
 infantile
@@ -573,7 +544,6 @@ informal
 innocent
 insecure
 insidious
-insignificant
 insistent
 instructive
 insubstantial
@@ -582,15 +552,11 @@ intent
 intentional
 interesting
 internal
-international
-intrepid
 ironclad
-irresponsible
 irritating
 itchy
 jaded
 jagged
-jam-packed
 jaunty
 jealous
 jittery
@@ -606,16 +572,13 @@ jumbo
 junior
 jumpy
 juvenile
-kaleidoscopic
 keen
 key
 kind
-kindhearted
 kindly
 klutzy
 knobby
 knotty
-knowledgeable
 knowing
 known
 kooky
@@ -636,7 +599,6 @@ left
 legal
 legitimate
 light
-lighthearted
 likable
 likely
 limited
@@ -653,7 +615,6 @@ loathsome
 lone
 lonely
 long
-long-term
 loose
 lopsided
 lost
@@ -670,7 +631,6 @@ lumpy
 lustrous
 luxurious
 mad
-made-up
 magnificent
 majestic
 major
@@ -721,7 +681,6 @@ motionless
 mountainous
 muddy
 muffled
-multicolored
 mundane
 murky
 mushy
@@ -741,7 +700,6 @@ needy
 negative
 neglected
 negligible
-neighboring
 nervous
 new
 next
@@ -774,7 +732,6 @@ offbeat
 offensive
 official
 old
-old-fashioned
 only
 open
 optimal
@@ -886,9 +843,7 @@ queasy
 querulous
 questionable
 quick
-quick-witted
 quiet
-quintessential
 quirky
 quixotic
 quizzical
@@ -963,10 +918,7 @@ scratchy
 scrawny
 second
 secondary
-second-hand
 secret
-self-assured
-self-reliant
 selfish
 sentimental
 separate
@@ -988,7 +940,6 @@ shocked
 shocking
 shoddy
 short
-short-term
 showy
 shrill
 shy
@@ -1029,7 +980,6 @@ solid
 somber
 some
 spherical
-sophisticated
 sore
 sorrowful
 soulful
@@ -1093,7 +1043,6 @@ superb
 superficial
 superior
 supportive
-sure-footed
 surprised
 suspicious
 svelte
@@ -1267,14 +1216,6 @@ weepy
 weighty
 weird
 welcome
-well-documented
-well-groomed
-well-informed
-well-lit
-well-made
-well-off
-well-to-do
-well-worn
 wet
 which
 whimsical
