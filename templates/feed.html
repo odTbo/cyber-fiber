@@ -20,7 +20,11 @@
 
                     <hr>
                     <div>
-                        <p id="PostBody">{{ post.body }}</p>
+                        {% if post.body|length > 100 %}
+                            <span id="PostBody">{{ post.body[:100] }}...</span>
+                        {% else %}
+                            <span id="PostBody">{{ post.body }}</span>
+                        {% endif %}
                     </div>
                     <hr>
                 </div>
