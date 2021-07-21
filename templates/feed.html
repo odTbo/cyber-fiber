@@ -11,7 +11,6 @@
                     <div class="row">
                         <div class="col" align="left">
                             <a href="#" id="PostAuthor">{{ post.author.username }}</a>
-                            {#                        <h5 id="PostTitle">{{ post.title }}</h5>#}
                         </div>
                         <div class="col" align="right">
                             <h5 class="ml-auto">{{ post.date }}</h5>
@@ -44,7 +43,7 @@
                         <i class="fas fa-edit"></i>
                     </button>
                     {% if post.author == current_user or current_user.id == 1 %}
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg{{ post.id }}">
                             <i class="fas fa-trash"></i>
                         </button>
 {#                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" role="button"><i class="fas fa-trash"></i></a>#}
@@ -53,7 +52,7 @@
             </div>
 
             <!-- Expand Post -->
-            <div class="modal fade" id="expandedPostModal" tabindex="-1" role="dialog" aria-labelledby="expandedPostModalTitle" aria-hidden="true">
+            <div class="modal fade" id="expandedPostModal{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="expandedPostModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
