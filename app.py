@@ -227,5 +227,12 @@ def delete_post(post_id):
     return redirect(url_for('feed_page'))
 
 
+@login_required
+@app.route('/profile')
+def profile():
+    user_posts = Posts.query.filter_by(author=current_user)
+    return render_template('profile.html', user_posts=user_posts)
+
+
 if __name__ == '__main__':
     app.run()

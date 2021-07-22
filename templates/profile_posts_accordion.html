@@ -1,0 +1,43 @@
+<div class="accordion" id="postsAccordion">
+    {% for post in user_posts %}
+        <div class="card">
+            <div class="card-header d-flex" id="heading{{ post.id }}">
+                <h2 class="mb-0">
+                    <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{ post.id }}" aria-expanded="true" aria-controls="collapse{{ post.id }}">
+                        {{ post.title }}
+                    </button>
+                </h2>
+                <button type="button" class="ml-auto btn btn-sm btn-danger" data-toggle="modal" data-target="#postDeleteWarningMsg-{{ post.id }}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div id="collapse{{ post.id }}" class="collapse" aria-labelledby="heading{{ post.id }}" data-parent="#postsAccordion">
+                <div class="card-body">
+                    {{ post.body }}
+                </div>
+            </div>
+
+            {#        DELETE POST WARNING#}
+            <div class="modal fade" id="postDeleteWarningMsg-{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="postDeleteWarningMsgTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="postDeleteWarningMsgTitle">Warning</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this post?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                            <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger d-flex justify-content-center align-items-center" role="button">Yes, delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
