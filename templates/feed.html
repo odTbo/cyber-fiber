@@ -43,7 +43,7 @@
                         <i class="fas fa-edit"></i>
                     </button>
                     {% if post.author == current_user or current_user.id == 1 %}
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg-{{ post.id }}">
                             <i class="fas fa-trash"></i>
                         </button>
 {#                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" role="button"><i class="fas fa-trash"></i></a>#}
@@ -79,7 +79,7 @@
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 {% if post.author == current_user or current_user.id == 1 %}
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postDeleteWarningMsg-{{ post.id }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                     {#                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" role="button"><i class="fas fa-trash"></i></a>#}
@@ -91,7 +91,7 @@
             </div>
 
             {#            DELETE POST WARNING#}
-            <div class="modal fade" id="postDeleteWarningMsg" tabindex="-1" role="dialog" aria-labelledby="postDeleteWarningMsgTitle" aria-hidden="true">
+            <div class="modal fade" id="postDeleteWarningMsg-{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="postDeleteWarningMsgTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
