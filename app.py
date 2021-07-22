@@ -234,5 +234,14 @@ def profile():
     return render_template('profile.html', user_posts=user_posts)
 
 
+@login_required
+@app.route('/change-name')
+def change_name():
+    current_user.username = generate_name()
+
+    db.session.commit()
+    return redirect(url_for('profile'))
+
+
 if __name__ == '__main__':
     app.run()
